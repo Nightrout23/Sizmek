@@ -107,7 +107,6 @@ def process_file(file_path):
                 percentage = float(value.strip('%'))
 
                 if placement_type == "In-Stream Video":
-                    # Условия подсветки для In-Stream Video
                     if column_name == 'Imps GIVT, %':
                         if percentage <= 1:
                             cell.fill = green_fill
@@ -131,7 +130,6 @@ def process_file(file_path):
                             cell.fill = red_fill
 
                 elif placement_type in ["In-Banner"]:
-                    # Условия подсветки для In-Banner и adx_proxy
                     if column_name == 'Imps GIVT, %':
                         if percentage < 1:
                             cell.fill = green_fill
@@ -185,4 +183,5 @@ def process():
         return jsonify({"error": "Invalid file format. Please upload a CSV file."}), 400
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=True)
